@@ -2,7 +2,11 @@ import React from 'react'
 
 const Home = () => {
   return (
-    <div>Landing page</div>
+    <div>
+      <h1 className='underline'>
+        hello
+      </h1>
+    </div>
   )
 }
 
