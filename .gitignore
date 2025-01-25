@@ -6,3 +6,5 @@ package-lock.json
 
 #Add package.json to gitignore
 package.json
+
+.env
