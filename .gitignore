@@ -1,0 +1,8 @@
+#Add node-modules to gitignore
+node_modules
+
+#Add package-lock.json to gitignore
+package-lock.json
+
+#Add package.json to gitignore
+package.json
