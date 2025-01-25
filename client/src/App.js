@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from './views/Home';
 import Navbar from './components/Navbar';
-import Test from './views/Test';
+import ProfileDash from './views/ProfileDash';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/test" element={<Test />} />
+        <Route path="/dashboard" element={<ProfileDash />} />
 
       </Routes>
     </div>
