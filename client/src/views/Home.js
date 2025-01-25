@@ -26,7 +26,7 @@ const Home = () => {
   // )
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <h1 style={{ textAlign: 'center' }}>BACKEND UP AND RUNNING</h1>
+      <h1 className='underline' style={{ textAlign: 'center' }}>BACKEND UP AND RUNNING</h1>
       {error && (
         <div style={{ color: 'red', textAlign: 'center' }}>
           <strong>Error:</strong> {error}
