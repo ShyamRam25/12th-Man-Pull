@@ -14,7 +14,7 @@ const CenteredPage = () => {
         </h1>
 
         {/* Button beneath the text */}
-        <Link to = "/dashboard" className="bg-aggie-maroon text-other-white text-3xl px-20 py-8 rounded-md font-custom-font hover:bg-aggie-white hover:text-aggie-maroon transition-all">
+        <Link to = "/About" className="bg-aggie-maroon text-other-white text-3xl px-20 py-8 rounded-md font-custom-font hover:bg-aggie-white hover:text-aggie-maroon transition-all">
             Get Started
         </Link>
     </div>

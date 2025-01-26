@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "@react-oauth/google": "^0.12.1",
+    "@react-pdf/renderer": "^4.1.6",
     "@tailwindcss/postcss": "^4.0.0",
     "axios": "^1.7.9",
     "cra-template": "1.2.0",
+    "html-to-image": "^1.11.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.3",
