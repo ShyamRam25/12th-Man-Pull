@@ -29,55 +29,38 @@ const DeckBoxes = () => {
   };
 
   return (
-    <div style={{ height: '100vh', padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', paddingLeft: '10px', paddingRight: '10px' }}>
+    <div className="h-screen p-5 flex justify-between items-start space-x-5">
       {/* Left side: UINDropdown */}
-      <div style={{ width: '50%' }}>
+      <div className="w-1/2">
         <UINDropdown onPassAdded={addPass} />
       </div>
 
       {/* Right side: Deck Boxes */}
-      <div style={{ width: '50%' }}>
-        <div style={{ marginTop: '32px', marginBottom: '32px' }}>
+      <div className="w-1/2">
+        <div className="mt-8 mb-8">
           {/* Validate Button */}
           <button
             onClick={handleValidate}
-            style={{
-              backgroundColor: '#3b82f6',
-              color: 'white',
-              padding: '12px 24px',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              marginBottom: '24px',
-              transition: 'background-color 0.3s ease',
-            }}
-            onMouseOver={(e) => (e.target.style.backgroundColor = '#2563eb')}
-            onMouseOut={(e) => (e.target.style.backgroundColor = '#3b82f6')}
+            className="bg-aggie-maroon text-other-white text-4xl px-12 py-3 rounded-md font-custom-font hover:bg-aggie-white hover:text-aggie-maroon transition-all"
           >
             Validate
           </button>
 
           {/* Deck Boxes */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div className="flex flex-col gap-4">
             {['1st Deck', '2nd Deck', '3rd Deck'].map((deck, index) => (
               <div
                 key={index}
                 onClick={() => handleDeckClick(index)} // Handle click on deck box
-                style={{
-                  width: '100%',
-                  height: '160px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  backgroundColor: isValidated
-                    ? (activeDeck === index ? 'green' : '#6b7280') // Green if active
-                    : (activeDeck === index ? 'green' : '#d1d5db'), // Default color
-                  color: 'white',
-                  fontWeight: 'bold',
-                  fontSize: '20px',
-                  borderRadius: '8px',
-                  transition: 'background-color 0.3s ease',
-                  cursor: 'pointer',
-                }}
+                className={`w-full h-40 flex justify-center items-center text-aggie-white font-bold text-2xl rounded-lg cursor-pointer border border-black transition-all duration-300 ease-in-out ${
+                  isValidated
+                    ? activeDeck === index
+                      ? 'bg-aggie-maroon'
+                      : 'bg-aggie-gray'
+                    : activeDeck === index
+                    ? 'bg-aggie-maroon'
+                    : 'bg-other-white'
+                }`}
               >
                 {deck}
               </div>
@@ -89,46 +72,24 @@ const DeckBoxes = () => {
       {/* Pop-up with Sports Passes */}
       {showPopup && (
         <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
+          className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex justify-center items-center"
           onClick={closePopup} // Close on outside click
         >
           <div
-            style={{
-              backgroundColor: 'white',
-              padding: '20px',
-              borderRadius: '8px',
-              width: '300px',
-              textAlign: 'center',
-            }}
+            className="bg-aggie-white p-6 rounded-lg w-72 text-center"
             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
           >
-            <h3>Sports Passes</h3>
-            <ul style={{ listStyleType: 'none', padding: '0' }}>
+            <h3 className="text-xl font-semibold mb-4">Sports Passes</h3>
+            <ul className="list-none p-0">
               {sportsPasses.map((pass, index) => (
-                <li key={index} style={{ marginBottom: '10px' }}>
+                <li key={index} className="mb-2">
                   {pass}
                 </li>
               ))}
             </ul>
             <button
               onClick={closePopup}
-              style={{
-                backgroundColor: '#3b82f6',
-                color: 'white',
-                padding: '10px 20px',
-                borderRadius: '8px',
-                cursor: 'pointer',
-              }}
+              className="bg-aggie-maroon text-aggie-white py-2 px-4 rounded-lg mt-4"
             >
               Close
             </button>
