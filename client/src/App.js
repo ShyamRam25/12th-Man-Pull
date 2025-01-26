@@ -20,14 +20,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/FAQ" element={<FAQ />} />
         <Route path="/about" element={<About />} />
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <ProfileDash />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/dashboard" element={<ProfileDash />} />" 
       </Routes>
     </div>
   );
