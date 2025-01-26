@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
 import UINDropdown from './UINDropdown'; // Assuming you have UINDropdown component
+import axios from 'axios';
 
 const DeckBoxes = () => {
   const [isValidated, setIsValidated] = useState(false);
   const [activeDeck, setActiveDeck] = useState(null);
   const [sportsPasses, setSportsPasses] = useState([]); // List to store sports passes
   const [showPopup, setShowPopup] = useState(false); // State to show/hide the pop-up
+  const [validationMessage, setValidationMessage] = useState('');
+  const [res_names, setResNames] = useState([]);
 
-  const handleValidate = () => {
-    setIsValidated(true); // Grays out the boxes when clicked
-    setShowPopup(true); // Show the pop-up when validate is clicked
-  };
+  const handleValidate = async () => {
+    console.log(sportsPasses);
+
+    try {
+      const uins = sportsPasses.join(',');
+
+      var api_string = "http://localhost:3001/api/check-classifications?uins=" + uins;
+      const res = await axios.get(api_string);
+      setResNames(res.data.names);
+      setShowPopup(true);
+    } catch (err) {
+      console.error("Couldn't validate sports passes:", err);
+    }
+  }
 
   const handleDeckClick = (deckIndex) => {
     if (activeDeck === deckIndex) {
@@ -104,9 +117,9 @@ const DeckBoxes = () => {
           >
             <h3 className="text-xl font-custom-font font-semibold mb-4">Are you sure you want to pull for these passes?</h3>
             <ul className="list-none p-0">
-              {sportsPasses.map((pass, index) => (
+              {res_names.map((name, index) => (
                 <li key={index} className="mb-2">
-                  {"UIN: " + pass}
+                  {name}
                 </li>
               ))}
             </ul>
@@ -114,7 +127,7 @@ const DeckBoxes = () => {
               onClick={closePopup}
               className="bg-aggie-maroon font-custom-font text-aggie-white py-2 px-4 rounded-lg mt-4 hover:bg-maroon-dark transition-all" // Close button
             >
-              Close
+              Confirm
             </button>
           </div>
         </div>
