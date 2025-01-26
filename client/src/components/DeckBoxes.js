@@ -11,6 +11,7 @@ const DeckBoxes = () => {
   const [res_names, setResNames] = useState([]);
   const [selectedModal, setSelectedModal] = useState("default");
   const [errorMessage, setErrorMessage] = useState("");
+  const [deck, setDeck] = useState(0);
 
   const handleValidate = async () => {
     console.log(sportsPasses);
@@ -63,13 +64,32 @@ const DeckBoxes = () => {
     setShowPopup(false); // Close the popup when clicked outside
   };
 
-  const handlePullTickets = () => {
-    if (activeDeck !== null) {
-      // If a deck is selected, pull tickets for that deck
-      alert(`Pulling tickets for ${['1st Deck', '2nd Deck', '3rd Deck'][activeDeck]}`);
-    } else {
-      // If no deck is selected, show an alert indicating to select a deck
-      alert('Please select a deck before pulling tickets.');
+  const handlePullTickets = async () => {
+    var api_string = "http://localhost:3001/api/pull"
+    // const uins = sportsPasses.join(',');
+    const uins = sportsPasses.map((uin) => uin.toString().trim());
+
+    console.log(uins);
+    
+    const body = {
+      "uins": uins,
+      "deck": activeDeck,
+    }
+
+    console.log(body);
+    
+    try {
+        const res = await axios.post(api_string, body, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        console.log(res);
+        alert("Tickets Pulled Successfully for " + res.data.section + " " + res.data.row + " " + res.data.seats);
+
+    } catch (err) {
+      console.error("Couldn't pull tickets:", err);
     }
   };
 
