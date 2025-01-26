@@ -2,7 +2,7 @@ import React from 'react'
 
 const ProfileDash = () => {
   return (
-    <div>ProfileDash</div>
+    <div>This is the profile dashboard.</div>
   )
 }
 
