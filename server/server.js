@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const cors = require('cors');
 const { Pool } = require('pg');
 
 const app = express();
@@ -17,7 +18,7 @@ const pool = new Pool({
     },
 });
 
-app.use(express.json());
+app.use(cors());
 
 app.get('/students', async (req, res) => {
     try {
