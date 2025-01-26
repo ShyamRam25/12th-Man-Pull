@@ -5,7 +5,18 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    colors: {
+      'aggie-maroon': '#651d2b',
+      'aggie-white': '#FFFFFF',
+      'aggie-gray': '#707373',
+      'other-white': '#d6d3c4',
+      'maroon-dark': '#500000'
+    },
+    extend: {
+      fontFamily: {
+        'custom-font': ['klinic', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }

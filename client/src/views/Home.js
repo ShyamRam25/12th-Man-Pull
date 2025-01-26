@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../components/AuthContext';
 import AuthButton from '../components/AuthButton';
+import BackgroundVideo from '../components/BackgroundVideo';
+import InitialText from '../components/InitialText';
 
 const Home = () => {
   // eslint-disable-next-line no-unused-vars
@@ -22,10 +24,11 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Welcome to Home!</h1>
-      {/* AuthButton will handle login/logout logic and redirection */}
+      <BackgroundVideo />
+      <InitialText />
       <AuthButton />
     </div>
+
   );
 };
 

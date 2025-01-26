@@ -9,3 +9,23 @@ body {
   background-repeat: repeat;
   background-color: #fff;
 }
+
+video {
+  filter: grayscale(100%) brightness(1.1);
+  position: absolute; 
+  right: 0; 
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+  width: auto; 
+  height: auto; 
+  z-index: -100;
+  background-size: cover;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+@font-face {
+  font-family: 'klinic';
+  src: url('./assets/klinic.otf') format('opentype');
+}
