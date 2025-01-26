@@ -35,7 +35,7 @@ const checkClassifications = async (req, res) => {
         }
         res.json({ over, under, names });
     } catch (err) { 
-        res.status(err.statusCode || 500).json({ error: err.message || 'internal error'});
+        res.status(err.statusCode || 500).json({error: err.message || 'internal error', uin: err.uin});
     }
 };
 
