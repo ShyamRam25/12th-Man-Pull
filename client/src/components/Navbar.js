@@ -18,7 +18,7 @@ const Navbar = () => {
 
       {/* Right side: Dashboard and FAQ links */}
       <div className="flex-1 flex justify-center ml-auto">
-        <Link to="/dashboard" className="text-aggie-white font-custom-font text-2xl -mx-56 hover:text-aggie-gray">Profile</Link>
+        <Link to="/dashboard" className="text-aggie-white font-custom-font text-2xl -mx-56 hover:text-aggie-gray">Pull Tickets</Link>
         <Link to="/FAQ" className="text-aggie-white font-custom-font text-2xl mx-80 hover:text-aggie-gray">FAQ</Link>
       </div>
 
