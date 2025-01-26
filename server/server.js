@@ -1,6 +1,10 @@
 require('dotenv').config();
 
+const express = require('express');
 const { Pool } = require('pg');
+
+const app = express();
+const PORT = 3001;
 
 const pool = new Pool({
     host: process.env.DB_HOST,
@@ -13,13 +17,18 @@ const pool = new Pool({
     },
 });
 
-async function queryDatabase() {
-    try {
-        const res = await pool.query('SELECT * FROM students');
-        console.log('Data:', res.rows);
-    } catch (err) {
-        console.error('Error executing query:', err);
-    }
-}
+app.use(express.json());
 
-queryDatabase();
+app.get('/students', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM students');
+        res.json(result.rows);
+    } catch (err) {
+        console.error('Error querying database:', err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
