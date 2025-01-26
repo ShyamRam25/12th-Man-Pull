@@ -5,7 +5,12 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    colors: {
+      'aggie-maroon': '#500000',
+      'aggie-white': '#FFFFFF',
+      'aggie-gray': '#707373',
+      'other-white': '#d6d3c4',
+    },
   },
   plugins: [],
 }
