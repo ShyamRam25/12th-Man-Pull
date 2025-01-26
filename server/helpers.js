@@ -28,4 +28,19 @@ const validate_uin = async (uin) => {
     return true;
 };
 
-module.exports = { validate_uin };
+
+const check_deck_availability = async (deck_id, tickets_count) =>{
+    var result1 = await pool.query('SELECT section_num FROM sections WHERE deck = $1', [deck_id]);
+    sections = result1.rows.map(row => row.section_num)
+    for (const section of sections) {
+        var result2 = await pool.query('SELECT seats_available FROM rows WHERE section_num = $1', [section]);
+        available_seats = result2.rows[0].seats_available;
+        if (available_seats >= tickets_count) {
+            return true;
+        }
+    }
+        
+    return false;
+
+}
+module.exports = { validate_uin, check_deck_availability };

@@ -1,5 +1,5 @@
 const pool = require('./db');
-const { validate_uin } = require('./helpers');
+const { validate_uin, check_deck_availability } = require('./helpers');
 
 const getStudents = async (req, res) => {
     try {
@@ -40,6 +40,33 @@ const checkClassifications = async (req, res) => {
 };
 
 const checkDecks = async (req, res) => {
+    const tickets_count = parseInt(req.query.tickets);
+    available_decks = [];
+    if (tickets_count > 10) {
+        if (await check_deck_availability(3, tickets_count)) {
+            res.json([3]);
+            return
+        }
+        else {
+            res.json([0]);
+            return
+        }
+    }
+
+    if ( await check_deck_availability(1, tickets_count)) {
+        available_decks.push(1);
+    }
+    if ( await check_deck_availability(2, tickets_count)) {
+        available_decks.push(2);
+    }
+    if ( await check_deck_availability(3, tickets_count)) {
+        available_decks.push(3);
+    }
+    if (available_decks.length === 0) {
+        res.json([0]);
+        return
+    }
+    res.json(available_decks);
 
 };
 
