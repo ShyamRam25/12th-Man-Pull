@@ -5,13 +5,12 @@ const UINDropdown = ({ onPassAdded }) => {
   const [currentPass, setCurrentPass] = useState('');
 
   const handleAddPass = () => {
-    if (/^\d{9}$/.test(currentPass)) {
+    // Only add pass if input is not empty
+    if (currentPass.trim()) {
       const newPasses = [...passes, currentPass];
       setPasses(newPasses);
       onPassAdded(newPasses); // Pass the updated passes to the parent
       setCurrentPass(''); // Clear the input
-    } else {
-      alert('Please enter a valid 9-digit integer.');
     }
   };
 
@@ -22,19 +21,20 @@ const UINDropdown = ({ onPassAdded }) => {
   };
 
   return (
-    <div className="p-4 bg-gray-100 rounded-md shadow-lg max-w-lg mx-auto">
+    <div className="p-4 bg-aggie-gray rounded-md shadow-lg max-w-lg mx-auto">
       {/* Input and Add Pass Button */}
       <div className="flex items-center gap-4 mb-4">
         <input
           type="text"
           value={currentPass}
           onChange={(e) => setCurrentPass(e.target.value)}
-          placeholder="Enter 9-digit pass"
-          className="border border-gray-300 rounded-md p-2 w-full"
+          placeholder="Enter pass"
+          className="border border-aggie-maroon rounded-md p-2 w-full"
         />
         <button
           onClick={handleAddPass}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+          disabled={!currentPass.trim()} // Only allow click if input is not empty
+          className="bg-aggie-maroon font-custom-font text-med text-other-white px-4 py-2 rounded-md"
         >
           Add Pass
         </button>
@@ -46,12 +46,12 @@ const UINDropdown = ({ onPassAdded }) => {
           {passes.map((pass, index) => (
             <div
               key={index}
-              className="flex items-center justify-between bg-white border border-gray-300 rounded-md p-2 shadow"
+              className="flex items-center justify-between bg-aggie-white border border-aggie-maroon rounded-md p-2 shadow"
             >
-              <span className="text-gray-700 font-medium">{pass}</span>
+              <span className="text-aggie-maroon font-medium">{pass}</span>
               <button
                 onClick={() => handleRemovePass(index)}
-                className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition"
+                className="bg-aggie-maroon font-custom-font text-aggie-white px-3 py-1 rounded-md hover:bg-maroon-dark transition"
               >
                 Remove
               </button>

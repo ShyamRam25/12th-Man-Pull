@@ -28,44 +28,67 @@ const DeckBoxes = () => {
     setShowPopup(false); // Close the popup when clicked outside
   };
 
+  const handlePullTickets = () => {
+    if (activeDeck !== null) {
+      // If a deck is selected, pull tickets for that deck
+      alert(`Pulling tickets for ${['1st Deck', '2nd Deck', '3rd Deck'][activeDeck]}`);
+    } else {
+      // If no deck is selected, show an alert indicating to select a deck
+      alert('Please select a deck before pulling tickets.');
+    }
+  };
+
   return (
     <div className="h-screen p-5 flex justify-between items-start space-x-5">
       {/* Left side: UINDropdown */}
       <div className="w-1/2">
         <UINDropdown onPassAdded={addPass} />
-      </div>
 
-      {/* Right side: Deck Boxes */}
-      <div className="w-1/2">
-        <div className="mt-8 mb-8">
-          {/* Validate Button */}
+        {/* Validate Button (Aligned to the right within the same div) */}
+        <div className="flex justify-center mt-8">
           <button
             onClick={handleValidate}
             className="bg-aggie-maroon text-other-white text-4xl px-12 py-3 rounded-md font-custom-font hover:bg-aggie-white hover:text-aggie-maroon transition-all"
           >
             Validate
           </button>
+        </div>
+      </div>
 
+      {/* Right side: Deck Boxes and Pull Tickets Button (Same Div) */}
+      <div className="w-1/2">
+        <div className="flex flex-col gap-4">
           {/* Deck Boxes */}
-          <div className="flex flex-col gap-4">
-            {['1st Deck', '2nd Deck', '3rd Deck'].map((deck, index) => (
-              <div
-                key={index}
-                onClick={() => handleDeckClick(index)} // Handle click on deck box
-                className={`w-full h-40 flex justify-center items-center text-aggie-white font-bold text-2xl rounded-lg cursor-pointer border border-black transition-all duration-300 ease-in-out ${
-                  isValidated
-                    ? activeDeck === index
-                      ? 'bg-aggie-maroon'
-                      : 'bg-aggie-gray'
-                    : activeDeck === index
-                    ? 'bg-aggie-maroon'
-                    : 'bg-other-white'
-                }`}
-              >
-                {deck}
-              </div>
-            ))}
-          </div>
+          {['1st Deck', '2nd Deck', '3rd Deck'].map((deck, index) => (
+            <div
+              key={index}
+              onClick={() => handleDeckClick(index)} // Handle click on deck box
+              className={`w-full h-40 flex justify-center items-center text-aggie-white font-bold text-2xl rounded-lg cursor-pointer border border-black transition-all duration-300 ease-in-out ${
+                isValidated
+                  ? activeDeck === index
+                    ? 'bg-aggie-maroon hover:bg-maroon-dark'
+                    : 'bg-aggie-gray hover:bg-maroon-dark'
+                  : activeDeck === index
+                  ? 'bg-aggie-maroon hover:bg-maroon-dark'
+                  : 'bg-other-white hover:bg-maroon-dark'
+              }`}
+            >
+              {deck}
+            </div>
+          ))}
+
+          {/* Pull Tickets Button */}
+          <button
+            onClick={handlePullTickets}
+            className={`${
+              activeDeck === null
+                ? 'bg-gray-500 cursor-not-allowed'
+                : 'bg-aggie-maroon hover:bg-aggie-white hover:text-aggie-maroon'
+            } text-other-white text-4xl px-12 py-3 rounded-md font-custom-font transition-all mt-8`}
+            disabled={activeDeck === null} // Disable button if no deck is selected
+          >
+            Pull Tickets
+          </button>
         </div>
       </div>
 
@@ -79,17 +102,17 @@ const DeckBoxes = () => {
             className="bg-aggie-white p-6 rounded-lg w-72 text-center"
             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
           >
-            <h3 className="text-xl font-semibold mb-4">Sports Passes</h3>
+            <h3 className="text-xl font-custom-font font-semibold mb-4">Are you sure you want to pull for these passes?</h3>
             <ul className="list-none p-0">
               {sportsPasses.map((pass, index) => (
                 <li key={index} className="mb-2">
-                  {pass}
+                  {"UIN: " + pass}
                 </li>
               ))}
             </ul>
             <button
               onClick={closePopup}
-              className="bg-aggie-maroon text-aggie-white py-2 px-4 rounded-lg mt-4"
+              className="bg-aggie-maroon font-custom-font text-aggie-white py-2 px-4 rounded-lg mt-4 hover:bg-maroon-dark transition-all" // Close button
             >
               Close
             </button>
