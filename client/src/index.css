@@ -22,5 +22,14 @@ video {
   z-index: -100;
   background-size: cover;
   overflow: hidden;
+  object-fit: cover;
 }
 
+@font-face {
+  font-family: 'klinic';
+  src: url('./assets/klinic.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  padding: 0 10px;
+  font-size: 1.3rem;
+}
