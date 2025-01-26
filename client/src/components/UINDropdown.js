@@ -5,7 +5,7 @@ const UINDropdown = ({ onPassAdded }) => {
   const [currentPass, setCurrentPass] = useState('');
 
   const handleAddPass = () => {
-    if (/^\d{9}$/.test(currentPass)) {
+    if (/^\d{1,3}$/.test(currentPass)) {
       const newPasses = [...passes, currentPass];
       setPasses(newPasses);
       onPassAdded(newPasses); // Pass the updated passes to the parent

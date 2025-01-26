@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
 import UINDropdown from './UINDropdown'; // Assuming you have UINDropdown component
+import axios from 'axios';
 
 const DeckBoxes = () => {
   const [isValidated, setIsValidated] = useState(false);
   const [activeDeck, setActiveDeck] = useState(null);
   const [sportsPasses, setSportsPasses] = useState([]); // List to store sports passes
   const [showPopup, setShowPopup] = useState(false); // State to show/hide the pop-up
+  const [validationMessage, setValidationMessage] = useState('');
+  const [res_names, setResNames] = useState([]);
 
-  const handleValidate = () => {
-    setIsValidated(true); // Grays out the boxes when clicked
-    setShowPopup(true); // Show the pop-up when validate is clicked
-  };
+  const handleValidate = async () => {
+    console.log(sportsPasses);
+
+    try {
+      const uins = sportsPasses.join(',');
+
+      var api_string = "http://localhost:3001/api/check-classifications?uins=" + uins;
+      const res = await axios.get(api_string);
+      setResNames(res.data.names);
+      setShowPopup(true);
+    } catch (err) {
+      console.error("Couldn't validate sports passes:", err);
+    }
+  }
 
   const handleDeckClick = (deckIndex) => {
     if (activeDeck === deckIndex) {
@@ -52,15 +65,14 @@ const DeckBoxes = () => {
               <div
                 key={index}
                 onClick={() => handleDeckClick(index)} // Handle click on deck box
-                className={`w-full h-40 flex justify-center items-center text-aggie-white font-bold text-2xl rounded-lg cursor-pointer border border-black transition-all duration-300 ease-in-out ${
-                  isValidated
-                    ? activeDeck === index
-                      ? 'bg-aggie-maroon'
-                      : 'bg-aggie-gray'
-                    : activeDeck === index
+                className={`w-full h-40 flex justify-center items-center text-aggie-white font-bold text-2xl rounded-lg cursor-pointer border border-black transition-all duration-300 ease-in-out ${isValidated
+                  ? activeDeck === index
+                    ? 'bg-aggie-maroon'
+                    : 'bg-aggie-gray'
+                  : activeDeck === index
                     ? 'bg-aggie-maroon'
                     : 'bg-other-white'
-                }`}
+                  }`}
               >
                 {deck}
               </div>
@@ -79,11 +91,11 @@ const DeckBoxes = () => {
             className="bg-aggie-white p-6 rounded-lg w-72 text-center"
             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
           >
-            <h3 className="text-xl font-semibold mb-4">Sports Passes</h3>
+            <h3 className="text-xl font-semibold mb-4">Please confirm you are pulling for the following:</h3>
             <ul className="list-none p-0">
-              {sportsPasses.map((pass, index) => (
+              {res_names.map((name, index) => (
                 <li key={index} className="mb-2">
-                  {pass}
+                  {name}
                 </li>
               ))}
             </ul>
@@ -91,7 +103,7 @@ const DeckBoxes = () => {
               onClick={closePopup}
               className="bg-aggie-maroon text-aggie-white py-2 px-4 rounded-lg mt-4"
             >
-              Close
+              Confirm
             </button>
           </div>
         </div>
