@@ -18,7 +18,7 @@ const CenteredPage = () => {
         {/* <Link to = "/dashboard" className="bg-aggie-maroon text-other-white text-3xl px-20 py-8 rounded-md font-custom-font hover:bg-aggie-white hover:text-aggie-maroon transition-all">
             Get Started
         </Link> */}
-        <div className = "bg-aggie-maroon text-other-white text-3xl px-16 py-3 rounded-md font-custom-font hover:bg-aggie-white hover:text-aggie-maroon transition-all">
+        <div className = "bg-aggie-maroon text-other-white text-4xl px-16 py-3 rounded-md font-custom-font hover:bg-aggie-white hover:text-aggie-maroon transition-all">
           <AuthButton />
         </div>
 
