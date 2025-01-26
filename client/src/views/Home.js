@@ -1,80 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { useAuth } from '../components/AuthContext';
+import AuthButton from '../components/AuthButton';
 
 const Home = () => {
-
-  const [books, setBooks] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(null);
+  const { profile } = useAuth(); 
 
+  // Watch for changes in the `profile` or `user` state
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/books')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch books');
-        }
-        return response.json();
-      })
-      .then((data) => setBooks(data))
-      .catch((error) => setError(error.message));
-  }, []);
+    console.log('Profile state changed:', profile); // For debugging purposes
+  }, [profile]);  // This will trigger whenever `profile` changes
 
+  // Add another effect to trigger a re-render when the profile is cleared
+  useEffect(() => {
+    if (!profile) {
+      // When profile is null (logged out), re-fetch or reset state
+      setError(null);  // Reset error if needed.
+    }
+  }, [profile]);  // This effect will run when the profile state changes
 
-  // return (
-  //   <div>
-  //     <div>Landing page</div>
-  //   </div>
-
-  // )
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <h1 className='underline' style={{ textAlign: 'center' }}>BACKEND UP AND RUNNING</h1>
-      {error && (
-        <div style={{ color: 'red', textAlign: 'center' }}>
-          <strong>Error:</strong> {error}
-        </div>
-      )}
-      {!error && books.length === 0 && (
-        <div style={{ textAlign: 'center', marginTop: '20px' }}>
-          Loading books...
-        </div>
-      )}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '20px',
-          marginTop: '20px',
-        }}
-      >
-        {books.map((book) => (
-          <div
-            key={book.id}
-            style={{
-              border: '1px solid #ccc',
-              borderRadius: '8px',
-              padding: '16px',
-              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-              backgroundColor: '#fff',
-            }}
-          >
-            <h2 style={{ fontSize: '1.5em', marginBottom: '10px' }}>
-              {book.title}
-            </h2>
-            <p>
-              <strong>Author:</strong> {book.author}
-            </p>
-            <p>
-              <strong>Pages:</strong> {book.pages_num}
-            </p>
-            {book.review && (
-              <p>
-                <strong>Review:</strong> {book.review}
-              </p>
-            )}
-          </div>
-        ))}
-      </div>
+    <div>
+      <h1>Welcome to Home!</h1>
+      {/* AuthButton will handle login/logout logic and redirection */}
+      <AuthButton />
     </div>
   );
-}
+};
 
-export default Home
+export default Home;
