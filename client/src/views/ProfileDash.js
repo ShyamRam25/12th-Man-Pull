@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { useAuth } from '../components/AuthContext';
+import UINDropdown from '../components/UINDropdown';
+import DeckBoxes from '../components/DeckBoxes';
 
 const ProfileDash = () => {
   const { user, profile, login, updateProfile, logOut } = useAuth();
@@ -32,20 +34,11 @@ const ProfileDash = () => {
     }
   }, [user, updateProfile]);
 
-  return (
-    <div>
-      <h2>React Google Login</h2>
-      {profile ? (
-        <div>
-          <img src={profile.picture} alt="user" />
-          <h3>User Logged in</h3>
-          <p>Name: {profile.name}</p>
-          <p>Email: {profile.email}</p>
-          <button onClick={handleLogout}>Log out</button> {/* Log out button */}
-        </div>
-      ) : (
-        <button onClick={() => handleLogin()}>Sign in with Google 🚀</button>
-      )}
+  return (      
+    <div className="h-screen py-20">      
+      <DeckBoxes />
+
+
     </div>
   );
 };
