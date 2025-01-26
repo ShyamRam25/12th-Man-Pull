@@ -11,7 +11,7 @@ body {
 }
 
 video {
-  filter: grayscale(100%);
+  filter: grayscale(100%) brightness(1.1);
   position: absolute; 
   right: 0; 
   bottom: 0;
@@ -28,8 +28,4 @@ video {
 @font-face {
   font-family: 'klinic';
   src: url('./assets/klinic.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  padding: 0 10px;
-  font-size: 1.3rem;
 }

@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import Video from '../assets/Video.mp4';
+import BackgroundVideo from '../components/BackgroundVideo';
+import InitialText from '../components/InitialText';
 
 const Home = () => {
   return (
     <div>
-      <video src={Video} autoPlay loop muted />
+      <BackgroundVideo />
+      <InitialText />
     </div>
+
   );
 }
 
