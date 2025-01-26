@@ -3,41 +3,27 @@ import React from 'react';
 import { useAuth } from './AuthContext';
 
 const AuthButton = () => {
-  const { profile, login, logOut } = useAuth();
+  const { profile, login, logOut } = useAuth()
 
   return (
-    <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-        {profile ? (
-            <button
-              onClick={logOut}
-              style={{
-                padding: '10px 20px',
-                backgroundColor: '#d9534f',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer',
-              }}
-            >
-              Log Out
-            </button>
-        ) : (
-          <button
-            onClick={login}
-            style={{
-              padding: '10px 20px',
-              backgroundColor: '#4285F4',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-            }}
-          >
-            Sign in with Google 🚀
-          </button>
-        )}
-      </div>
-  );
-};
+    <div className="text-center mb-5">
+      {profile ? (
+        <button
+          onClick={logOut}
+          className="px-4 py-2 bg-red-600 text-white border-none rounded cursor-pointer"
+        >
+          Log Out
+        </button>
+      ) : (
+        <button
+          onClick={login}
+          className="px-4 py-2 bg-blue-600 text-white border-none rounded cursor-pointer"
+        >
+          Get Started
+        </button>
+      )}
+    </div>
+  )
+}
 
 export default AuthButton;
