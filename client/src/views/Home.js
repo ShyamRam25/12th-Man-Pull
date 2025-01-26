@@ -26,7 +26,6 @@ const Home = () => {
     <div>
       <BackgroundVideo />
       <InitialText />
-      <AuthButton />
     </div>
 
   );
