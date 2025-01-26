@@ -9,6 +9,7 @@ const DeckBoxes = () => {
   const [showPopup, setShowPopup] = useState(false); // State to show/hide the pop-up
   const [validationMessage, setValidationMessage] = useState('');
   const [res_names, setResNames] = useState([]);
+  const [decks_available, setDecksAvailable] = useState([]);
   const [selectedModal, setSelectedModal] = useState("default");
   const [errorMessage, setErrorMessage] = useState("");
   const [deck, setDeck] = useState(0);
@@ -22,6 +23,8 @@ const DeckBoxes = () => {
       var api_string = "http://localhost:3001/api/check-classifications?uins=" + uins;
       const res = await axios.get(api_string);
       setResNames(res.data.names);
+      setDecksAvailable(res.data.decks);
+      setIsValidated(true);
       console.log(res.status);
       if (res.status === 200) {
         showDefaultView();
@@ -49,6 +52,10 @@ const DeckBoxes = () => {
   }
 
   const handleDeckClick = (deckIndex) => {
+    if (!decks_available.includes(deckIndex+1)) {
+      return;
+    }
+
     if (activeDeck === deckIndex) {
       setActiveDeck(null); // Reset if the same deck is clicked again
     } else {
@@ -118,11 +125,8 @@ const DeckBoxes = () => {
             <div
               key={index}
               onClick={() => handleDeckClick(index)} // Handle click on deck box
-              className={`w-full h-40 flex justify-center items-center text-aggie-white font-bold text-2xl rounded-lg cursor-pointer border border-black transition-all duration-300 ease-in-out ${isValidated
-                ? activeDeck === index
-                  ? 'bg-aggie-maroon hover:bg-maroon-dark'
-                  : 'bg-aggie-gray hover:bg-maroon-dark'
-                : activeDeck === index
+              className={`w-full h-40 flex justify-center items-center text-aggie-white font-bold text-2xl rounded-lg cursor-pointer border border-black transition-all duration-300 ease-in-out ${
+                activeDeck === index
                   ? 'bg-aggie-maroon hover:bg-maroon-dark'
                   : 'bg-other-white hover:bg-maroon-dark'
                 }`}
