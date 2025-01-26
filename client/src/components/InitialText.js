@@ -1,5 +1,6 @@
 import React from 'react';
 import sec from '../assets/sec.svg';
+import { Link } from 'react-router-dom';
 
 const CenteredPage = () => {
   return (
@@ -13,9 +14,9 @@ const CenteredPage = () => {
         </h1>
 
         {/* Button beneath the text */}
-        <button className="bg-aggie-maroon text-other-white text-3xl px-20 py-8 rounded-md font-custom-font hover:bg-aggie-white hover:text-aggie-maroon transition-all">
+        <Link to = "/dashboard" className="bg-aggie-maroon text-other-white text-3xl px-20 py-8 rounded-md font-custom-font hover:bg-aggie-white hover:text-aggie-maroon transition-all">
             Get Started
-        </button>
+        </Link>
     </div>
   );
 }

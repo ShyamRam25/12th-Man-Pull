@@ -4,7 +4,7 @@ import Logo from '../assets/A&M.jpg'
 
 const Navbar = () => {
   return (
-    <nav className="bg-aggie-maroon flex fixed w-screen h-20 items-center">
+    <nav className="bg-aggie-maroon flex fixed w-screen h-20 items-center z-50">
       {/* Left side: About and Home links */}
       <div className="flex-1 flex justify-center mr-auto">
         <Link to="/about" className="text-aggie-white font-custom-font text-2xl mx-80">About</Link>
